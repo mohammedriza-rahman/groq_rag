@@ -372,4 +372,4 @@ if send_button and query:
             response = "❗ Please upload a document first!"
 
     st.session_state.messages.append({"role": "assistant", "content": response})
-    st.experimental_rerun()
+    st.rerun()
