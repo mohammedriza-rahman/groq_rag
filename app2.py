@@ -490,7 +490,7 @@ def generate_response(query: str, context: str, max_tokens: int = 4000) -> str:
 
 # --- Streamlit UI ---
 
-# Custom CSS for chat interface
+# Custom CSS and SVG logo
 st.markdown("""
 <style>
 body {
@@ -512,7 +512,7 @@ body {
     padding-bottom: 20px;
     border-bottom: 1px solid #e5e5e5;
 }
-.header img {
+.header svg {
     width: 40px;
     height: 40px;
 }
@@ -539,12 +539,14 @@ body {
     border-radius: 8px;
     background-color: #fafafa;
     margin-bottom: 20px;
+    display: block; /* Ensure proper block rendering */
 }
 .chat-message {
     margin-bottom: 15px;
     padding: 10px 15px;
     border-radius: 8px;
     max-width: 70%;
+    display: inline-block;
 }
 .user-message {
     background-color: #007bff;
@@ -572,6 +574,14 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
+# SVG Logo
+logo_svg = """
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1a1a1a">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+"""
+
 # Initialize session state
 if 'vector_store' not in st.session_state:
     st.session_state.vector_store = VectorStore()
@@ -595,10 +605,10 @@ with st.sidebar:
 # Main container
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
 
-# Header
-st.markdown("""
+# Header with SVG logo
+st.markdown(f"""
 <div class="header">
-    <img src="https://via.placeholder.com/40" alt="Logo">
+    {logo_svg}
     <h1>Document Chat Assistant</h1>
 </div>
 """, unsafe_allow_html=True)
